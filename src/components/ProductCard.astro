@@ -4,14 +4,17 @@ const { product, tone = 'butter', claims = [] } = Astro.props as { product: Prod
 const gallery = product.gallery ?? [product.image];
 const flavor = product.flavor ?? product.description;
 const productId = product.name.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const productTone = product.tone ?? tone;
+const stageStyle = product.bgColor ? `background-color: ${product.bgColor};` : '';
+const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
 ---
 <article class="product-card reveal">
-  <div class={`product-stage tone-${tone}`}>
+  <div class={`product-stage tone-${productTone}`} style={stageStyle}>
     <img src={product.image} alt={`${product.name.en} snack package`} width="900" height="900" loading="lazy" />
   </div>
   <div class="product-body">
     <div class="sizes">{product.sizes.map((size) => <span class="size">{size}</span>)}</div>
-    <h3 data-en={product.name.en} data-id={product.name.id}>{product.name.en}</h3>
+    <h3 style={titleStyle} data-en={product.name.en} data-id={product.name.id}>{product.name.en}</h3>
     <p data-en={product.description.en} data-id={product.description.id}>{product.description.en}</p>
     {claims.length > 0 && <div class="badges">{claims.slice(0, 2).map((claim) => <span class="badge" data-en={claim.en} data-id={claim.id}>{claim.en}</span>)}</div>}
     
@@ -33,7 +36,7 @@ const productId = product.name.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       <div class="modal-content-grid">
         <!-- Gallery Column -->
         <div class="modal-gallery">
-          <div class={`modal-main-image tone-${tone}`}>
+          <div class={`modal-main-image tone-${productTone}`} style={stageStyle}>
             <img class="modal-active-img" src={product.image} alt={product.name.en} width="900" height="900" />
           </div>
           {gallery.length > 1 && (

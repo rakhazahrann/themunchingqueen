@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "build": "astro check && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview --host"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
