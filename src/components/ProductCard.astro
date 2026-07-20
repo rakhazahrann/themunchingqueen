@@ -1,0 +1,16 @@
+---
+import type { Product, Category } from '../data/products';
+const { product, tone = 'butter', claims = [] } = Astro.props as { product: Product; tone?: Category['color']; claims?: Category['claims'] };
+---
+<article class="product-card reveal">
+  <div class={`product-stage tone-${tone}`}>
+    <img src={product.image} alt={`${product.name.en} snack package`} width="900" height="900" loading="lazy" />
+  </div>
+  <div class="product-body">
+    <div class="sizes">{product.sizes.map((size) => <span class="size">{size}</span>)}</div>
+    <h3 data-en={product.name.en} data-id={product.name.id}>{product.name.en}</h3>
+    <p data-en={product.description.en} data-id={product.description.id}>{product.description.en}</p>
+    {claims.length > 0 && <div class="badges">{claims.slice(0, 2).map((claim) => <span class="badge" data-en={claim.en} data-id={claim.id}>{claim.en}</span>)}</div>}
+    <a class="button button--small" href="/contact" data-en="Find a store" data-id="Cari toko">Find a store</a>
+  </div>
+</article>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { categories } from '../data/products';
+---
+<BaseLayout title="Our products" description="Explore The Munching Queen's Fish & Cheese crackers, pasta chips, crispy brownies, tempeh chips, spicy crackers and cappuccino chips.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" data-en="Our products" data-id="Produk kami">Our products</span>
+      <h1 data-en="Big flavour. Little bags of joy." data-id="Rasa besar. Kemasan kecil penuh bahagia.">Big flavour. Little bags of joy.</h1>
+      <p class="lede" data-en="Meet our whole pantry—from the first Fish & Cheese crunch born in our kitchen to spirited Indonesian tempeh and prawn crackers." data-id="Kenali seluruh koleksi kami—dari kerenyahan Ikan & Keju pertama yang lahir di dapur, hingga keripik tempe dan kerupuk udang bercita rasa Indonesia.">Meet our whole pantry—from the first Fish & Cheese crunch born in our kitchen to spirited Indonesian tempeh and prawn crackers.</p>
+      <div class="category-filter" aria-label="Product category filters">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true" data-en="All snacks" data-id="Semua camilan">All snacks</button>
+        {categories.map((category) => <button class="filter-button" type="button" data-filter={category.id} aria-pressed="false" data-en={category.name.en} data-id={category.name.id}>{category.name.en}</button>)}
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>No preservatives</span><span>Real ingredients</span><span>Playful flavours</span><span>Made with care</span><span>No preservatives</span><span>Real ingredients</span><span>Playful flavours</span><span>Made with care</span></div></div>
+
+  <div class="container">
+    {categories.map((category) => (
+      <section class="category-section" data-category={category.id}>
+        <div class="category-heading">
+          <div><span class="eyebrow" data-en="Snack family" data-id="Keluarga camilan">Snack family</span><h2 data-en={category.name.en} data-id={category.name.id}>{category.name.en}</h2></div>
+          <div><p data-en={category.intro.en} data-id={category.intro.id}>{category.intro.en}</p><div class="badges">{category.claims.map((claim) => <span class="badge" data-en={claim.en} data-id={claim.id}>{claim.en}</span>)}</div></div>
+        </div>
+        <div class="card-grid">{category.products.map((product) => <ProductCard product={product} tone={category.color} claims={category.claims} />)}</div>
+      </section>
+    ))}
+  </div>
+
+  <section class="section section--tight"><div class="container"><div class="cta-panel reveal"><span class="eyebrow" data-en="Found your flavour?" data-id="Sudah menemukan rasanya?">Found your flavour?</span><h2 data-en="We will show you where to get it." data-id="Kami akan menunjukkan tempat membelinya.">We will show you where to get it.</h2><div class="button-row" style="justify-content:center"><a class="button" href="/contact" data-en="Where to buy" data-id="Tempat membeli">Where to buy</a></div></div></div></section>
+
+  <script>
+    document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        document.querySelectorAll<HTMLElement>('[data-category]').forEach((section) => {
+          section.hidden = filter !== 'all' && section.dataset.category !== filter;
+        });
+      });
+    });
+  </script>
+</BaseLayout>

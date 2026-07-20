@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(python -c \"import zipfile, xml.etree.ElementTree as ET; p=r'DATA WEB TMQ.docx'; z=zipfile.ZipFile\\(p\\); root=ET.fromstring\\(z.read\\('word/document.xml'\\)\\); ns='{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'; print\\('\\\\n'.join\\(''.join\\(t.text or '' for t in para.iter\\(ns+'t'\\)\\) for para in root.iter\\(ns+'p'\\)\\)\\)\")",
+      "Bash(pandoc *)"
+    ]
+  }
+}

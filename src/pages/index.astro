@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import MarketplaceLinks from '../components/MarketplaceLinks.astro';
+import { certifications } from '../data/site';
+import { categories, featured } from '../data/products';
+const featuredTones = [categories[0].color, categories[2].color, categories[3].color];
+---
+<BaseLayout title="Healthy snacks, happy little munchers" description="The Munching Queen creates thoughtfully made Indonesian snacks for families, using real ingredients and joyful flavours.">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow" data-en="From Surabaya, with a happy crunch" data-id="Dari Surabaya, dengan kerenyahan ceria">From Surabaya, with a happy crunch</span>
+        <h1><span data-en="Made for little hands." data-id="Dibuat untuk tangan mungil.">Made for little hands.</span> <em data-en="Loved by everyone." data-id="Disukai semua orang.">Loved by everyone.</em></h1>
+        <p class="lede" data-en="Real ingredients, familiar Indonesian roots and playful flavours—made by parents who believe better snacks should still taste delicious." data-id="Bahan asli, akar kuliner Indonesia, dan rasa yang ceria—dibuat oleh para orang tua yang percaya camilan lebih baik harus tetap lezat.">Real ingredients, familiar Indonesian roots and playful flavours—made by parents who believe better snacks should still taste delicious.</p>
+        <div class="button-row">
+          <a class="button" href="/products" data-en="Meet our snacks" data-id="Kenali camilan kami">Meet our snacks</a>
+          <a class="button button--secondary" href="#our-story" data-en="Read our story" data-id="Baca cerita kami">Read our story</a>
+        </div>
+        <span class="hero-note" data-en="No nasty extras. Just a really good munch." data-id="Tanpa bahan yang tidak perlu. Hanya camilan yang lezat.">No nasty extras. Just a really good munch.</span>
+      </div>
+      <div class="picnic-board" aria-label="A playful arrangement of The Munching Queen snack packages">
+        <img class="hero-pack hero-pack--one" src="/images/products/fish-cheese/original.png" alt="Fish and Cheese Original package" width="900" height="900" />
+        <img class="hero-pack hero-pack--two" src="/images/products/brownies/chocolate.png" alt="Chocolate Crispy Brownies package" width="900" height="900" />
+        <img class="hero-pack hero-pack--three" src="/images/products/tempeh/salmon-furikake.png" alt="Salmon Furikake Tempeh Chips package" width="900" height="900" />
+        <span class="sticker sticker--hero" data-en="Happy munching!" data-id="Selamat ngemil!">Happy munching!</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Real ingredients</span><span>Made by parents</span><span>Indonesian roots</span><span>Kid-friendly crunch</span><span>Real ingredients</span><span>Made by parents</span><span>Indonesian roots</span><span>Kid-friendly crunch</span></div></div>
+
+  <section class="section" id="our-story">
+    <div class="container story-grid">
+      <div class="story-photo reveal"><img src="/images/lifestyle/fish-cheese.webp" alt="The Munching Queen Fish and Cheese snacks styled for sharing" width="1080" height="1350" loading="lazy" /></div>
+      <div class="story-card reveal">
+        <span class="eyebrow" data-en="Our story" data-id="Cerita kami">Our story</span>
+        <h2 data-en="A family kitchen with a bigger dream." data-id="Dapur keluarga dengan mimpi yang lebih besar.">A family kitchen with a bigger dream.</h2>
+        <p data-en="We are parents and snack enthusiasts from Surabaya. In 2016, we introduced Kroepoek Waroeng at a food expo in Dubai. Seeing international guests light up over Indonesian crackers gave us a mission: share our food heritage in a ready-to-munch, joyfully flavoured way." data-id="Kami adalah para orang tua dan pencinta camilan dari Surabaya. Pada 2016, kami memperkenalkan Kroepoek Waroeng di pameran makanan Dubai. Antusiasme pengunjung internasional terhadap kerupuk Indonesia memberi kami misi: membagikan warisan kuliner ini dalam bentuk siap santap yang penuh rasa.">We are parents and snack enthusiasts from Surabaya. In 2016, we introduced Kroepoek Waroeng at a food expo in Dubai. Seeing international guests light up over Indonesian crackers gave us a mission: share our food heritage in a ready-to-munch, joyfully flavoured way.</p>
+        <p data-en="During the pandemic, we looked for locally made snacks our three-year-old would love—without the extras we did not want. We could not find enough, so we experimented with natural ingredients in our own kitchen. That is how our Fish & Cheese series, and The Munching Queen, came to life." data-id="Saat pandemi, kami mencari camilan lokal yang disukai anak kami yang berusia tiga tahun—tanpa bahan tambahan yang tidak kami inginkan. Pilihannya belum cukup, jadi kami bereksperimen dengan bahan alami di dapur sendiri. Dari situlah seri Ikan & Keju dan The Munching Queen lahir.">During the pandemic, we looked for locally made snacks our three-year-old would love—without the extras we did not want. We could not find enough, so we experimented with natural ingredients in our own kitchen. That is how our Fish & Cheese series, and The Munching Queen, came to life.</p>
+        <blockquote class="pullquote" data-en="We believe quality is key—and a better snack can taste every bit as good." data-id="Kami percaya kualitas adalah kunci—dan camilan yang lebih baik tetap bisa terasa sangat lezat.">We believe quality is key—and a better snack can taste every bit as good.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tone-powder">
+    <div class="container">
+      <span class="eyebrow" data-en="A peek inside the pantry" data-id="Mengintip isi lemari camilan">A peek inside the pantry</span>
+      <h2 data-en="Something for every kind of munch." data-id="Ada camilan untuk setiap selera.">Something for every kind of munch.</h2>
+      <p class="lede muted" data-en="Savoury, sweet, familiar or adventurous—start with three family favourites." data-id="Gurih, manis, familiar, atau berani—mulai dari tiga favorit keluarga.">Savoury, sweet, familiar or adventurous—start with three family favourites.</p>
+      <div class="card-grid">
+        {featured.map((product, index) => <ProductCard product={product} tone={featuredTones[index]} />)}
+      </div>
+      <div class="button-row"><a class="button" href="/products" data-en="Explore all products" data-id="Lihat semua produk">Explore all products</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="center"><span class="eyebrow" data-en="Trust the process" data-id="Proses yang dapat dipercaya">Trust the process</span><h2 data-en="Made the right way, not the easy way." data-id="Dibuat dengan cara yang benar, bukan yang mudah.">Made the right way, not the easy way.</h2><p class="lede muted" data-en="Our facility, packaging and quality checks follow recognised food safety standards." data-id="Fasilitas, kemasan, dan pemeriksaan kualitas kami mengikuti standar keamanan pangan yang diakui.">Our facility, packaging and quality checks follow recognised food safety standards.</p></div>
+      <div class="cert-grid">
+        {certifications.map((cert) => <article class="cert-card reveal"><span class="cert-mark">{cert.mark}</span><h3>{cert.title}</h3><p data-en={cert.copy.en} data-id={cert.copy.id}>{cert.copy.en}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight"><div class="container"><div class="cta-panel reveal"><span class="eyebrow" data-en="Ready to munch?" data-id="Siap ngemil?">Ready to munch?</span><h2 data-en="Find your next favourite bag." data-id="Temukan kemasan favorit berikutnya.">Find your next favourite bag.</h2><div class="button-row" style="justify-content:center"><a class="button" href="/products" data-en="Browse flavours" data-id="Jelajahi rasa">Browse flavours</a><a class="button button--secondary" href="/contact" data-en="Where to buy" data-id="Tempat membeli">Where to buy</a></div></div></div></section>
+
+  <section class="section"><div class="container"><span class="eyebrow" data-en="Shop online" data-id="Belanja online">Shop online</span><h2 data-en="Choose your nearest pantry." data-id="Pilih toko terdekat.">Choose your nearest pantry.</h2><MarketplaceLinks /></div></section>
+</BaseLayout>

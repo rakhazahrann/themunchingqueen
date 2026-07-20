@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarketplaceLinks from '../components/MarketplaceLinks.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title="Contact us" description="Contact The Munching Queen for collaborations, feedback, product questions and online store information.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" data-en="Contact us" data-id="Hubungi kami">Contact us</span>
+      <h1 data-en="Let’s talk over a good munch." data-id="Mari berbincang sambil ngemil.">Let’s talk over a good munch.</h1>
+      <p class="lede" data-en="Collaboration idea, thoughtful feedback or a question about our snacks? Send us a note. We aim to reply within one business day." data-id="Punya ide kolaborasi, masukan, atau pertanyaan tentang camilan kami? Kirim pesan. Kami berusaha membalas dalam satu hari kerja.">Collaboration idea, thoughtful feedback or a question about our snacks? Send us a note. We aim to reply within one business day.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container contact-grid">
+      <div class="reveal">
+        <span class="eyebrow" data-en="Say hello" data-id="Sapa kami">Say hello</span>
+        <h2 data-en="A real person will read your message." data-id="Pesan Anda akan dibaca oleh tim kami.">A real person will read your message.</h2>
+        <ul class="contact-list">
+          <li><a href={`mailto:${site.email}`}><b aria-hidden="true">@</b><span>{site.email}</span></a></li>
+          <li><a href={`https://wa.me/${site.phoneHref.slice(1)}`} target="_blank" rel="noreferrer"><b aria-hidden="true">W</b><span>{site.phone}</span></a></li>
+          <li><a href={site.instagramUrl} target="_blank" rel="noreferrer"><b aria-hidden="true">IG</b><span>{site.instagram}</span></a></li>
+        </ul>
+        <p class="muted" data-en="CV. Trinusa Jaya Abadi · Surabaya, Indonesia" data-id="CV. Trinusa Jaya Abadi · Surabaya, Indonesia">CV. Trinusa Jaya Abadi · Surabaya, Indonesia</p>
+      </div>
+      <form class="contact-form reveal" id="contact-form" data-recipient={site.email}>
+        <h2 data-en="Drop us a line" data-id="Kirim pesan">Drop us a line</h2>
+        <div class="field"><label for="name" data-en="Name" data-id="Nama">Name</label><input id="name" name="name" autocomplete="name" required /></div>
+        <div class="field"><label for="email" data-en="Email" data-id="Email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+        <div class="field"><label for="message" data-en="Message" data-id="Pesan">Message</label><textarea id="message" name="message" required></textarea></div>
+        <div class="honeypot" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+        <button class="button" type="submit" data-en="Open email and send" data-id="Buka email dan kirim">Open email and send</button>
+        <p class="form-note muted" data-en="This opens your email app with the message prepared. You still choose when to send it." data-id="Tombol ini membuka aplikasi email dengan pesan yang sudah disiapkan. Anda tetap memilih kapan mengirimnya.">This opens your email app with the message prepared. You still choose when to send it.</p>
+        <noscript><p><a class="text-link" href={`mailto:${site.email}`}>Email {site.email}</a></p></noscript>
+      </form>
+    </div>
+  </section>
+
+  <section class="section tone-mint">
+    <div class="container">
+      <span class="eyebrow" data-en="Shop online" data-id="Belanja online">Shop online</span>
+      <h2 data-en="Pick the store closest to your pantry." data-id="Pilih toko yang paling dekat.">Pick the store closest to your pantry.</h2>
+      <p class="lede muted" data-en="Our Jakarta and Surabaya stores are available on Shopee and Tokopedia." data-id="Toko Jakarta dan Surabaya kami tersedia di Shopee dan Tokopedia.">Our Jakarta and Surabaya stores are available on Shopee and Tokopedia.</p>
+      <MarketplaceLinks />
+    </div>
+  </section>
+
+  <section class="section section--tight"><div class="container"><div class="cta-panel reveal"><span class="eyebrow" data-en="Quick question?" data-id="Pertanyaan singkat?">Quick question?</span><h2 data-en="WhatsApp may be the fastest way." data-id="WhatsApp mungkin cara tercepat.">WhatsApp may be the fastest way.</h2><div class="button-row" style="justify-content:center"><a class="button" href={`https://wa.me/${site.phoneHref.slice(1)}`} target="_blank" rel="noreferrer" data-en="Chat on WhatsApp" data-id="Chat di WhatsApp">Chat on WhatsApp</a></div></div></div></section>
+
+  <script>
+    const form = document.querySelector('#contact-form');
+    const recipient = form?.getAttribute('data-recipient') ?? '';
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!(form instanceof HTMLFormElement) || !form.reportValidity()) return;
+      const data = new FormData(form);
+      if (data.get('website')) return;
+      const lang = document.documentElement.lang === 'id' ? 'id' : 'en';
+      const name = String(data.get('name') || '');
+      const email = String(data.get('email') || '');
+      const message = String(data.get('message') || '');
+      const subject = lang === 'id' ? `Pesan website dari ${name}` : `Website message from ${name}`;
+      const body = lang === 'id' ? `Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}` : `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  </script>
+</BaseLayout>

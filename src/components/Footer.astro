@@ -1,0 +1,24 @@
+---
+import { nav, site } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/images/logo/the-munching-queen.webp" alt="The Munching Queen" width="900" height="900" loading="lazy" />
+        <p data-en="Deliciously flavoured Indonesian snacks, made thoughtfully for happy little munchers." data-id="Camilan Indonesia penuh rasa, dibuat dengan penuh perhatian untuk si kecil yang bahagia.">Deliciously flavoured Indonesian snacks, made thoughtfully for happy little munchers.</p>
+      </div>
+      <div>
+        <ul class="footer-links">
+          {nav.map((item) => <li><a href={item.href} data-en={item.label.en} data-id={item.label.id}>{item.label.en}</a></li>)}
+        </ul>
+        <ul class="footer-links">
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><a href={`https://wa.me/${site.phoneHref.slice(1)}`} target="_blank" rel="noreferrer">WhatsApp</a></li>
+          <li><a href={site.instagramUrl} target="_blank" rel="noreferrer">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© {new Date().getFullYear()} CV. Trinusa Jaya Abadi · The Munching Queen</div>
+  </div>
+</footer>

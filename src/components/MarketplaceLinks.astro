@@ -1,0 +1,11 @@
+---
+import { marketplaces } from '../data/site';
+---
+<div class="market-grid">
+  {marketplaces.map((market) => (
+    <a class={`market-card tone-${market.tone}`} href={market.href} target="_blank" rel="noreferrer">
+      <span><strong>{market.store}</strong><span>{market.city}</span></span>
+      <b aria-hidden="true">↗</b>
+    </a>
+  ))}
+</div>
