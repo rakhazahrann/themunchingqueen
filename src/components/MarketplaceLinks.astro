@@ -3,9 +3,42 @@ import { marketplaces } from '../data/site';
 ---
 <div class="market-grid">
   {marketplaces.map((market) => (
-    <a class={`market-card tone-${market.tone}`} href={market.href} target="_blank" rel="noreferrer">
-      <span><strong>{market.store}</strong><span>{market.city}</span></span>
-      <b aria-hidden="true">↗</b>
+    <a class={`market-card market-card--${market.brand}`} href={market.href} target="_blank" rel="noreferrer" aria-label={`${market.store} ${market.city} (opens in a new tab)`}>
+      <span class="market-logo" aria-hidden="true">
+        {market.brand === 'shopee' ? (
+          <svg viewBox="-1 -1 26 26" fill="#EE4D2D" xmlns="http://www.w3.org/2000/svg">
+            <title>Shopee</title>
+            <path d="M15.9414 17.9633c.229-1.879-.981-3.077-4.1758-4.0969-1.548-.528-2.277-1.22-2.26-2.1719.065-1.056 1.048-1.825 2.352-1.85a5.2898 5.2898 0 0 1 2.8838.89c.116.072.197.06.263-.039.09-.145.315-.494.39-.62.051-.081.061-.187-.068-.281-.185-.1369-.704-.4149-.983-.5319a6.4697 6.4697 0 0 0-2.5118-.514c-1.909.008-3.4129 1.215-3.5389 2.826-.082 1.1629.494 2.1078 1.73 2.8278.262.152 1.6799.716 2.2438.892 1.774.552 2.695 1.5419 2.478 2.6969-.197 1.047-1.299 1.7239-2.818 1.7439-1.2039-.046-2.2878-.537-3.1278-1.19l-.141-.11c-.104-.08-.218-.075-.287.03-.05.077-.376.547-.458.67-.077.108-.035.168.045.234.35.293.817.613 1.134.775a6.7097 6.7097 0 0 0 2.8289.727 4.9048 4.9048 0 0 0 2.0759-.354c1.095-.465 1.8029-1.394 1.9449-2.554zM11.9986 1.4009c-2.068 0-3.7539 1.95-3.8329 4.3899h7.6657c-.08-2.44-1.765-4.3899-3.8328-4.3899zm7.8516 22.5981-.08.001-15.7843-.002c-1.074-.04-1.863-.91-1.971-1.991l-.01-.195L1.298 6.2858a.459.459 0 0 1 .45-.494h4.9748C6.8448 2.568 9.1607 0 11.9996 0c2.8388 0 5.1537 2.5689 5.2757 5.7898h4.9678a.459.459 0 0 1 .458.483l-.773 15.5883-.007.131c-.094 1.094-.979 1.9769-2.0709 2.0059z"/>
+          </svg>
+        ) : (
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Tokopedia</title>
+            <!-- Handle -->
+            <path d="M34 26 C34 10 66 10 66 26" stroke="#373737" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+            <!-- Darker Green Left Body -->
+            <path d="M50 26 C36 25 18 27 16 34 L16 76 C16 83 23 88 32 88 H50 V26 Z" fill="#25A443"/>
+            <!-- Lighter Green Right Body -->
+            <path d="M50 26 C64 25 82 27 84 34 L84 76 C84 83 77 88 68 88 H50 V26 Z" fill="#42B549"/>
+            <!-- Gloss Accent Top -->
+            <path d="M16 34 C28 29 72 29 84 34 C84 31 70 27 50 27 C30 27 16 31 16 34 Z" fill="#FFFFFF" fill-opacity="0.22"/>
+            <!-- Lower Belly Arc -->
+            <path d="M16 72 C28 88 72 88 84 72 C84 81 72 88 50 88 C28 88 16 81 16 72 Z" fill="#60C46B"/>
+            <!-- Left Eye -->
+            <circle cx="36" cy="54" r="16" fill="#FFFFFF"/>
+            <circle cx="39" cy="56" r="9.5" fill="#2D2D2D"/>
+            <circle cx="36" cy="52" r="3.6" fill="#FFFFFF"/>
+            <!-- Right Eye -->
+            <circle cx="64" cy="54" r="16" fill="#FFFFFF"/>
+            <circle cx="61" cy="56" r="9.5" fill="#2D2D2D"/>
+            <circle cx="58" cy="52" r="3.6" fill="#FFFFFF"/>
+            <!-- Orange Beak -->
+            <path d="M50 58 L42 66 C46 71 54 71 58 66 L50 58 Z" fill="#FFA800"/>
+            <path d="M43 66 C47 70 53 70 57 66 C54 73 46 73 43 66 Z" fill="#E05D00"/>
+          </svg>
+        )}
+      </span>
+      <span class="market-copy"><small data-en="Official store" data-id="Toko resmi">Official store</small><strong>{market.store}</strong><span>{market.city}</span></span>
+      <span class="market-cta" data-en="Shop now" data-id="Belanja">Shop now</span>
     </a>
   ))}
 </div>

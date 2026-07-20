@@ -17,15 +17,15 @@ export const nav = [
 ];
 
 export const marketplaces = [
-  { store: 'Shopee', city: 'Jakarta', href: 'https://shopee.co.id/munchingqueen', tone: 'butter' },
-  { store: 'Shopee', city: 'Surabaya', href: 'https://shopee.co.id/themunchingqueen', tone: 'blush' },
-  { store: 'Tokopedia', city: 'Jakarta', href: 'https://tokopedia.com/munchingqueen', tone: 'mint' },
-  { store: 'Tokopedia', city: 'Surabaya', href: 'https://tokopedia.com/munching-queen', tone: 'powder' },
+  { store: 'Shopee', city: 'Jakarta', href: 'https://shopee.co.id/munchingqueen', brand: 'shopee' },
+  { store: 'Shopee', city: 'Surabaya', href: 'https://shopee.co.id/themunchingqueen', brand: 'shopee' },
+  { store: 'Tokopedia', city: 'Jakarta', href: 'https://tokopedia.com/munchingqueen', brand: 'tokopedia' },
+  { store: 'Tokopedia', city: 'Surabaya', href: 'https://tokopedia.com/munching-queen', brand: 'tokopedia' },
 ];
 
 export const certifications = [
-  { mark: 'ISO', title: 'ISO 22000:2005', copy: { en: 'Certified food safety management facility.', id: 'Fasilitas bersertifikat manajemen keamanan pangan.' } },
-  { mark: 'H', title: 'HACCP', copy: { en: 'Preventive control from biological, chemical, and physical hazards.', id: 'Kendali preventif terhadap bahaya biologis, kimia, dan fisik.' } },
-  { mark: 'BP', title: 'BPOM', copy: { en: 'Products certified by Indonesia’s food and drug authority.', id: 'Produk bersertifikat Badan Pengawas Obat dan Makanan.' } },
-  { mark: '✓', title: 'Halal', copy: { en: 'Halal certified for confident family snacking.', id: 'Bersertifikat halal untuk camilan keluarga yang tepercaya.' } },
+  { id: 'iso', mark: 'ISO', title: 'ISO 22000:2005', copy: { en: 'Certified food safety management facility.', id: 'Fasilitas bersertifikat manajemen keamanan pangan.' } },
+  { id: 'haccp', mark: 'HACCP', title: 'HACCP', copy: { en: 'Preventive control from biological, chemical, and physical hazards.', id: 'Kendali preventif terhadap bahaya biologis, kimia, dan fisik.' } },
+  { id: 'bpom', mark: 'BPOM', title: 'BPOM', copy: { en: 'Products certified by Indonesia’s food and drug authority.', id: 'Produk bersertifikat Badan Pengawas Obat dan Makanan.' } },
+  { id: 'halal', mark: 'Halal', title: 'Halal', copy: { en: 'Halal certified for confident family snacking.', id: 'Bersertifikat halal untuk camilan keluarga yang tepercaya.' } },
 ];

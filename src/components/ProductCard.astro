@@ -1,6 +1,9 @@
 ---
 import type { Product, Category } from '../data/products';
 const { product, tone = 'butter', claims = [] } = Astro.props as { product: Product; tone?: Category['color']; claims?: Category['claims'] };
+const gallery = product.gallery ?? [product.image];
+const flavor = product.flavor ?? product.description;
+const productId = product.name.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 ---
 <article class="product-card reveal">
   <div class={`product-stage tone-${tone}`}>
@@ -11,6 +14,127 @@ const { product, tone = 'butter', claims = [] } = Astro.props as { product: Prod
     <h3 data-en={product.name.en} data-id={product.name.id}>{product.name.en}</h3>
     <p data-en={product.description.en} data-id={product.description.id}>{product.description.en}</p>
     {claims.length > 0 && <div class="badges">{claims.slice(0, 2).map((claim) => <span class="badge" data-en={claim.en} data-id={claim.id}>{claim.en}</span>)}</div>}
-    <a class="button button--small" href="/contact" data-en="Find a store" data-id="Cari toko">Find a store</a>
+    
+    <div class="product-card-footer">
+      <button class="modal-trigger-btn" type="button" data-open-modal={productId} data-en="View details" data-id="Lihat detail">
+        View details
+      </button>
+    </div>
   </div>
+
+  <!-- Pop-Up Modal -->
+  <dialog class="product-dialog" id={`modal-${productId}`}>
+    <div class="modal-backdrop" data-close-modal={productId}></div>
+    <div class="modal-card">
+      <button class="modal-close-btn" type="button" aria-label="Close modal" data-close-modal={productId}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-content-grid">
+        <!-- Gallery Column -->
+        <div class="modal-gallery">
+          <div class={`modal-main-image tone-${tone}`}>
+            <img class="modal-active-img" src={product.image} alt={product.name.en} width="900" height="900" />
+          </div>
+          {gallery.length > 1 && (
+            <div class="modal-thumbs-wrapper">
+              <span class="modal-thumbs-label" data-en="Select package size:" data-id="Pilih ukuran kemasan:">Select package size:</span>
+              <div class="modal-thumbs">
+                {gallery.map((img, idx) => (
+                  <button type="button" class={`modal-thumb-btn ${idx === 0 ? 'is-active' : ''}`} data-src={img} aria-label={`View size ${product.sizes[idx] ?? idx + 1}`}>
+                    <img src={img} alt="" width="150" height="150" loading="lazy" />
+                    {product.sizes[idx] && <span class="thumb-size-tag">{product.sizes[idx]}</span>}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <!-- Product Info Column -->
+        <div class="modal-info">
+          <span class="eyebrow" data-en="Inside the bag" data-id="Isi kemasan">Inside the bag</span>
+          <h2 class="modal-title" data-en={product.name.en} data-id={product.name.id}>{product.name.en}</h2>
+          <p class="modal-desc" data-en={product.description.en} data-id={product.description.id}>{product.description.en}</p>
+          
+          {claims.length > 0 && (
+            <div class="benefit-list">
+              {claims.map((claim) => (
+                <span data-en={`✓ ${claim.en}`} data-id={`✓ ${claim.id}`}>✓ {claim.en}</span>
+              ))}
+            </div>
+          )}
+
+          <dl class="detail-specs">
+            <div><dt data-en="Available sizes" data-id="Ukuran tersedia">Available sizes</dt><dd>{product.sizes.join(' · ')}</dd></div>
+            <div><dt data-en="Flavor profile" data-id="Profil rasa">Flavor profile</dt><dd data-en={flavor.en} data-id={flavor.id}>{flavor.en}</dd></div>
+            <div>
+              <dt data-en="Ingredients & nutrition" data-id="Bahan & informasi gizi">Ingredients & nutrition</dt>
+              {product.ingredients ? (
+                <dd data-en={product.ingredients.en} data-id={product.ingredients.id}>{product.ingredients.en}</dd>
+              ) : (
+                <dd data-en="See the selected pack for its complete, size-specific label." data-id="Lihat kemasan pilihan untuk label lengkap sesuai ukurannya.">See the selected pack for its complete, size-specific label.</dd>
+              )}
+            </div>
+            <div><dt data-en="Allergens" data-id="Alergen">Allergens</dt><dd data-en="Check the pack before serving; recipes vary by flavor." data-id="Periksa kemasan sebelum disajikan; resep berbeda menurut rasa.">Check the pack before serving; recipes vary by flavor.</dd></div>
+            <div><dt data-en="Storage" data-id="Penyimpanan">Storage</dt><dd data-en="Keep sealed in a cool, dry place away from direct sunlight." data-id="Simpan tertutup di tempat sejuk dan kering, jauh dari sinar matahari langsung.">Keep sealed in a cool, dry place away from direct sunlight.</dd></div>
+            <div><dt data-en="Certification" data-id="Sertifikasi">Certification</dt><dd data-en="Halal certified" data-id="Bersertifikat halal">Halal certified</dd></div>
+          </dl>
+
+          <div class="detail-actions">
+            <a class="button button--small" href="/#shop-online" data-en="Buy online" data-id="Beli online">Buy online</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
 </article>
+
+<script>
+  // Setup modal handlers
+  document.querySelectorAll('[data-open-modal]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const id = trigger.getAttribute('data-open-modal');
+      const dialog = document.getElementById(`modal-${id}`) as HTMLDialogElement | null;
+      if (dialog) {
+        dialog.showModal();
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-close-modal]').forEach((closeBtn) => {
+    closeBtn.addEventListener('click', () => {
+      const id = closeBtn.getAttribute('data-close-modal');
+      const dialog = document.getElementById(`modal-${id}`) as HTMLDialogElement | null;
+      if (dialog) {
+        dialog.close();
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // Handle ESC key or dialog native close event to restore scroll
+  document.querySelectorAll('.product-dialog').forEach((dialog) => {
+    dialog.addEventListener('close', () => {
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Thumbnail switching logic inside modals
+  document.querySelectorAll('.modal-thumbs').forEach((thumbContainer) => {
+    const mainImg = thumbContainer.closest('.modal-gallery')?.querySelector('.modal-active-img') as HTMLImageElement | null;
+    const thumbBtns = thumbContainer.querySelectorAll('.modal-thumb-btn');
+
+    thumbBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const newSrc = btn.getAttribute('data-src');
+        if (newSrc && mainImg) {
+          mainImg.src = newSrc;
+          thumbBtns.forEach((b) => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+        }
+      });
+    });
+  });
+</script>

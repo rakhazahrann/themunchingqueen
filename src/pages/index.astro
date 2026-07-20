@@ -2,9 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import MarketplaceLinks from '../components/MarketplaceLinks.astro';
+import CertIcon from '../components/CertIcon.astro';
 import { certifications } from '../data/site';
 import { categories, featured } from '../data/products';
 const featuredTones = [categories[0].color, categories[2].color, categories[3].color];
+const featuredClaims = [categories[0].claims, categories[2].claims, categories[3].claims];
 ---
 <BaseLayout title="Healthy snacks, happy little munchers" description="The Munching Queen creates thoughtfully made Indonesian snacks for families, using real ingredients and joyful flavours.">
   <section class="hero">
@@ -49,7 +51,7 @@ const featuredTones = [categories[0].color, categories[2].color, categories[3].c
       <h2 data-en="Something for every kind of munch." data-id="Ada camilan untuk setiap selera.">Something for every kind of munch.</h2>
       <p class="lede muted" data-en="Savoury, sweet, familiar or adventurous—start with three family favourites." data-id="Gurih, manis, familiar, atau berani—mulai dari tiga favorit keluarga.">Savoury, sweet, familiar or adventurous—start with three family favourites.</p>
       <div class="card-grid">
-        {featured.map((product, index) => <ProductCard product={product} tone={featuredTones[index]} />)}
+        {featured.map((product, index) => <ProductCard product={product} tone={featuredTones[index]} claims={featuredClaims[index]} />)}
       </div>
       <div class="button-row"><a class="button" href="/products" data-en="Explore all products" data-id="Lihat semua produk">Explore all products</a></div>
     </div>
@@ -59,12 +61,20 @@ const featuredTones = [categories[0].color, categories[2].color, categories[3].c
     <div class="container">
       <div class="center"><span class="eyebrow" data-en="Trust the process" data-id="Proses yang dapat dipercaya">Trust the process</span><h2 data-en="Made the right way, not the easy way." data-id="Dibuat dengan cara yang benar, bukan yang mudah.">Made the right way, not the easy way.</h2><p class="lede muted" data-en="Our facility, packaging and quality checks follow recognised food safety standards." data-id="Fasilitas, kemasan, dan pemeriksaan kualitas kami mengikuti standar keamanan pangan yang diakui.">Our facility, packaging and quality checks follow recognised food safety standards.</p></div>
       <div class="cert-grid">
-        {certifications.map((cert) => <article class="cert-card reveal"><span class="cert-mark">{cert.mark}</span><h3>{cert.title}</h3><p data-en={cert.copy.en} data-id={cert.copy.id}>{cert.copy.en}</p></article>)}
+        {certifications.map((cert) => (
+          <article class="cert-card reveal">
+            <div class="cert-mark">
+              <CertIcon type={cert.id} />
+            </div>
+            <h3>{cert.title}</h3>
+            <p data-en={cert.copy.en} data-id={cert.copy.id}>{cert.copy.en}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="section section--tight"><div class="container"><div class="cta-panel reveal"><span class="eyebrow" data-en="Ready to munch?" data-id="Siap ngemil?">Ready to munch?</span><h2 data-en="Find your next favourite bag." data-id="Temukan kemasan favorit berikutnya.">Find your next favourite bag.</h2><div class="button-row" style="justify-content:center"><a class="button" href="/products" data-en="Browse flavours" data-id="Jelajahi rasa">Browse flavours</a><a class="button button--secondary" href="/contact" data-en="Where to buy" data-id="Tempat membeli">Where to buy</a></div></div></div></section>
 
-  <section class="section"><div class="container"><span class="eyebrow" data-en="Shop online" data-id="Belanja online">Shop online</span><h2 data-en="Choose your nearest pantry." data-id="Pilih toko terdekat.">Choose your nearest pantry.</h2><MarketplaceLinks /></div></section>
+  <section class="section market-section" id="shop-online"><div class="container"><div class="market-heading"><div><span class="eyebrow" data-en="Shop online" data-id="Belanja online">Shop online</span><h2 data-en="Choose your nearest pantry." data-id="Pilih toko terdekat.">Choose your nearest pantry.</h2></div><p data-en="Fresh crunch, one click away. Pick an official store closest to you." data-id="Camilan renyah, tinggal satu klik. Pilih toko resmi terdekat.">Fresh crunch, one click away. Pick an official store closest to you.</p></div><MarketplaceLinks /></div></section>
 </BaseLayout>
