@@ -1,2 +1,0 @@
-  - ubah font nya ke poppins semua
-  - untuk pallete contoh brosur ![alt text](<BROSUR A5 CRISPY BROWNIES.png>)![alt text](<BROSUR FNC & MNC.png>) jadi rubah juga seperti card produk ny dll
