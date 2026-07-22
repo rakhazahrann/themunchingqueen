@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 import { site } from '../data/site';
+import { ClientRouter } from 'astro:transitions';
 
 const { title, description, image = '/images/lifestyle/fish-cheese.webp' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.domain);
@@ -27,8 +28,34 @@ const organization = {
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, site.domain)} />
     <meta name="theme-color" content="#FFFAF2" />
-    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+    <script is:inline>
+      (function() {
+        document.documentElement.classList.replace('no-js', 'js');
+        var saved = localStorage.getItem('tmq-language') || 'en';
+        document.documentElement.lang = saved;
+        document.documentElement.setAttribute('data-lang', saved);
+
+        function applyEarlyLang() {
+          var lang = localStorage.getItem('tmq-language') || 'en';
+          document.querySelectorAll('[data-en][data-id]').forEach(function(el) {
+            if (el.dataset[lang]) {
+              el.textContent = el.dataset[lang];
+            }
+          });
+          document.querySelectorAll('[data-lang]').forEach(function(btn) {
+            btn.setAttribute('aria-pressed', String(btn.dataset.lang === lang));
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', applyEarlyLang);
+        } else {
+          applyEarlyLang();
+        }
+      })();
+    </script>
     <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+    <ClientRouter />
     <title>{fullTitle}</title>
   </head>
   <body>
@@ -41,6 +68,7 @@ const organization = {
 
       const applyLanguage = (lang: 'en' | 'id') => {
         document.documentElement.lang = lang;
+        document.documentElement.setAttribute('data-lang', lang);
         document.querySelectorAll<HTMLElement>('[data-en][data-id]').forEach((element) => {
           element.textContent = element.dataset[lang] ?? element.textContent;
         });
@@ -48,50 +76,61 @@ const organization = {
           button.setAttribute('aria-pressed', String(button.dataset.lang === lang));
         });
         localStorage.setItem('tmq-language', lang);
+        window.dispatchEvent(new CustomEvent('tmq:lang-changed', { detail: { lang } }));
       };
 
-      const saved = localStorage.getItem('tmq-language');
-      applyLanguage(saved === 'id' ? 'id' : 'en');
-      document.querySelectorAll<HTMLButtonElement>('[data-lang]').forEach((button) => {
-        button.addEventListener('click', () => applyLanguage(button.dataset.lang === 'id' ? 'id' : 'en'));
-      });
+      const setupAppScript = () => {
+        const saved = localStorage.getItem('tmq-language');
+        applyLanguage(saved === 'id' ? 'id' : 'en');
 
-      const menu = document.querySelector<HTMLElement>('#site-nav');
-      const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
-      const overlay = document.querySelector<HTMLElement>('[data-nav-overlay]');
+        document.querySelectorAll<HTMLButtonElement>('[data-lang]').forEach((button) => {
+          button.onclick = () => applyLanguage(button.dataset.lang === 'id' ? 'id' : 'en');
+        });
 
-      const setMenuState = (open: boolean) => {
-        if (!menu || !toggle) return;
-        menu.classList.toggle('is-open', open);
-        overlay?.classList.toggle('is-open', open);
-        toggle.setAttribute('aria-expanded', String(open));
-        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        document.body.classList.toggle('nav-open', open);
-      };
+        const menu = document.querySelector<HTMLElement>('#site-nav');
+        const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+        const overlay = document.querySelector<HTMLElement>('[data-nav-overlay]');
 
-      toggle?.addEventListener('click', () => {
-        const isOpen = menu?.classList.contains('is-open') ?? false;
-        setMenuState(!isOpen);
-      });
+        const setMenuState = (open: boolean) => {
+          if (!menu || !toggle) return;
+          menu.classList.toggle('is-open', open);
+          overlay?.classList.toggle('is-open', open);
+          toggle.setAttribute('aria-expanded', String(open));
+          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+          document.body.classList.toggle('nav-open', open);
+        };
 
-      overlay?.addEventListener('click', () => setMenuState(false));
-
-      menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-        setMenuState(false);
-      }));
-
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && menu?.classList.contains('is-open')) {
-          setMenuState(false);
+        if (toggle) {
+          toggle.onclick = () => {
+            const isOpen = menu?.classList.contains('is-open') ?? false;
+            setMenuState(!isOpen);
+          };
         }
-      });
 
-      const header = document.querySelector('[data-header]');
-      const setHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 12);
-      setHeader();
-      window.addEventListener('scroll', setHeader, { passive: true });
+        if (overlay) {
+          overlay.onclick = () => setMenuState(false);
+        }
 
-      initAnimations();
+        menu?.querySelectorAll('a').forEach((link) => {
+          link.onclick = () => setMenuState(false);
+        });
+
+        window.onkeydown = (e) => {
+          if (e.key === 'Escape' && menu?.classList.contains('is-open')) {
+            setMenuState(false);
+          }
+        };
+
+        const header = document.querySelector('[data-header]');
+        const setHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 12);
+        setHeader();
+        window.onscroll = setHeader;
+
+        initAnimations();
+      };
+
+      setupAppScript();
+      document.addEventListener('astro:page-load', setupAppScript);
     </script>
   </body>
 </html>

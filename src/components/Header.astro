@@ -4,35 +4,115 @@ const { pathname } = Astro.url;
 const active = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
 ---
 <header class="site-header" data-header>
+  <div class="header-top-accent"></div>
   <div class="nav-overlay" data-nav-overlay aria-hidden="true"></div>
   <div class="container header-inner">
     <a class="brand" href="/" aria-label="The Munching Queen home">
-      <img src="/images/logo/the-munching-queen.webp" alt="" width="900" height="900" />
+      <div class="brand-logo-wrapper">
+        <img src="/images/logo/the-munching-queen.webp" alt="" width="900" height="900" />
+      </div>
+      <div class="brand-info">
+        <span class="brand-title">The Munching Queen</span>
+        <span class="brand-tagline" data-en="Healthy Kids Snacks" data-id="Camilan Sehat Anak">Healthy Kids Snacks</span>
+      </div>
     </a>
+
     <div class="nav-wrap">
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-        <div class="site-nav-links">
-          {nav.map((item) => (
-            <a class="nav-link" href={item.href} aria-current={active(item.href) ? 'page' : undefined} data-en={item.label.en} data-id={item.label.id}>{item.label.en}</a>
-          ))}
-        </div>
-        <div class="mobile-lang-wrap">
-          <span class="mobile-lang-label" data-en="Language" data-id="Bahasa">Language</span>
-          <div class="lang-switch lang-switch--mobile" aria-label="Language">
-            <button type="button" data-lang="en" aria-pressed="true">EN</button>
-            <button type="button" data-lang="id" aria-pressed="false">ID</button>
+        <div class="site-nav-container">
+          <div class="site-nav-links" data-nav-links>
+            <span class="nav-liquid-bg" data-nav-liquid aria-hidden="true"></span>
+            {nav.map((item) => (
+              <a
+                class="nav-link"
+                href={item.href}
+                aria-current={active(item.href) ? 'page' : undefined}
+                data-en={item.label.en}
+                data-id={item.label.id}
+              >
+                {item.label.en}
+              </a>
+            ))}
+          </div>
+
+          <div class="mobile-nav-footer">
+            <div class="mobile-lang-wrap">
+              <span class="mobile-lang-label" data-en="Language" data-id="Bahasa">Language</span>
+              <div class="lang-switch lang-switch--mobile" aria-label="Language">
+                <button type="button" data-lang="en" aria-pressed="true">EN</button>
+                <button type="button" data-lang="id" aria-pressed="false">ID</button>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
-      <div class="lang-switch lang-switch--desktop" aria-label="Language">
-        <button type="button" data-lang="en" aria-pressed="true">EN</button>
-        <button type="button" data-lang="id" aria-pressed="false">ID</button>
+
+      <div class="header-actions">
+        <div class="lang-switch lang-switch--desktop" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="id" aria-pressed="false">ID</button>
+        </div>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu" data-menu-toggle>
+          <span class="hamburger-line line-1"></span>
+          <span class="hamburger-line line-2"></span>
+        </button>
       </div>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu" data-menu-toggle>
-        <span class="hamburger-line line-1"></span>
-        <span class="hamburger-line line-2"></span>
-      </button>
     </div>
   </div>
 </header>
+
+<script>
+  function setupLiquidNav() {
+    const container = document.querySelector<HTMLElement>('[data-nav-links]');
+    const liquid = document.querySelector<HTMLElement>('[data-nav-liquid]');
+    if (!container || !liquid) return;
+
+    const links = container.querySelectorAll<HTMLElement>('.nav-link');
+
+    function moveTo(el: HTMLElement, isClick = false) {
+      if (!el || !liquid || !container) return;
+      const cRect = container.getBoundingClientRect();
+      const eRect = el.getBoundingClientRect();
+      const left = eRect.left - cRect.left;
+      const width = eRect.width;
+
+      liquid.style.transform = `translate3d(${left}px, 0, 0)`;
+      liquid.style.width = `${width}px`;
+      liquid.style.opacity = '1';
+
+      if (isClick) {
+        liquid.classList.add('is-clicking');
+        setTimeout(() => liquid.classList.remove('is-clicking'), 450);
+      }
+    }
+
+    function updateActivePosition(isClick = false) {
+      requestAnimationFrame(() => {
+        const activeLink = container?.querySelector<HTMLElement>('.nav-link[aria-current="page"]');
+        if (activeLink) {
+          moveTo(activeLink, isClick);
+        } else if (links.length > 0) {
+          moveTo(links[0], isClick);
+        }
+      });
+    }
+
+    updateActivePosition();
+
+    links.forEach((link) => {
+      link.onclick = () => {
+        links.forEach((l) => l.removeAttribute('aria-current'));
+        link.setAttribute('aria-current', 'page');
+        updateActivePosition(true);
+      };
+    });
+
+    window.addEventListener('tmq:lang-changed', () => updateActivePosition(false));
+    window.addEventListener('resize', () => updateActivePosition(false));
+  }
+
+  setupLiquidNav();
+  document.addEventListener('astro:page-load', setupLiquidNav);
+</script>
 
