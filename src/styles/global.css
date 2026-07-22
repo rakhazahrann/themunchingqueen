@@ -387,6 +387,7 @@ body.nav-open { overflow: hidden; }
 .sticker-content { position: relative; z-index: 1; width: 68%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: .35rem; color: var(--color-cocoa); }
 .sticker-star { margin-bottom: .12rem; font-size: clamp(.62rem, 1.1vw, .78rem); color: var(--color-cocoa); line-height: 1; opacity: .62; }
 .sticker-text { font-family: var(--font-display); font-weight: 900; font-size: clamp(.88rem, 1.65vw, 1.08rem); line-height: 1.04; letter-spacing: -.035em; color: var(--color-berry); }
+html[data-lang="id"] .sticker-text { font-size: clamp(.75rem, 1.4vw, .94rem); letter-spacing: -.04em; }
 .sticker-line { display: block; }
 .sticker-heart { margin-top: .2rem; color: var(--color-cocoa); stroke: currentColor; width: clamp(.7rem, 1.2vw, .86rem); height: clamp(.7rem, 1.2vw, .86rem); opacity: .58; }
 .sticker--hero { right: 1%; top: 1%; }
