@@ -433,6 +433,86 @@ body.nav-open { overflow: hidden; }
   transform: translateX(3px);
 }
 
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: rgb(255 255 255 / 90%);
+  text-decoration: none;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  padding: 0.45rem 0.65rem;
+  margin-inline: -0.65rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: color 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.footer-contact-item:hover {
+  color: #ffffff;
+  background: rgb(255 255 255 / 0.07);
+  border-color: rgb(255 255 255 / 0.12);
+  transform: translateX(4px);
+}
+
+.footer-contact-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.08);
+  color: var(--color-butter);
+  border: 1px solid rgb(255 255 255 / 0.15);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.footer-contact-item:hover .footer-contact-icon {
+  background: var(--color-butter);
+  color: var(--color-cocoa);
+  border-color: var(--color-butter);
+  transform: scale(1.08);
+}
+
+.footer-contact-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.footer-contact-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-butter);
+  opacity: 0.85;
+  margin-bottom: 0.1rem;
+}
+
+.footer-contact-val {
+  font-weight: 600;
+  font-size: 0.9rem;
+  word-break: break-word;
+  color: rgb(255 255 255 / 92%);
+}
+
+.footer-contact-item:hover .footer-contact-val {
+  color: #ffffff;
+}
+
 .footer-bottom {
   margin-top: 3.5rem;
   padding-top: 1.5rem;
