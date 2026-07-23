@@ -72,16 +72,16 @@ const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
             <div><dt data-en="Available sizes" data-id="Ukuran tersedia">Available sizes</dt><dd>{product.sizes.join(' · ')}</dd></div>
             <div><dt data-en="Flavor profile" data-id="Profil rasa">Flavor profile</dt><dd data-en={flavor.en} data-id={flavor.id}>{flavor.en}</dd></div>
             <div>
-              <dt data-en="Ingredients & nutrition" data-id="Bahan & informasi gizi">Ingredients & nutrition</dt>
+              <dt data-en="Ingredients" data-id="Bahan">Ingredients</dt>
               {product.ingredients ? (
                 <dd data-en={product.ingredients.en} data-id={product.ingredients.id}>{product.ingredients.en}</dd>
               ) : (
                 <dd data-en="See the selected pack for its complete, size-specific label." data-id="Lihat kemasan pilihan untuk label lengkap sesuai ukurannya.">See the selected pack for its complete, size-specific label.</dd>
               )}
             </div>
-            <div><dt data-en="Allergens" data-id="Alergen">Allergens</dt><dd data-en="Check the pack before serving; recipes vary by flavor." data-id="Periksa kemasan sebelum disajikan; resep berbeda menurut rasa.">Check the pack before serving; recipes vary by flavor.</dd></div>
-            <div><dt data-en="Storage" data-id="Penyimpanan">Storage</dt><dd data-en="Keep sealed in a cool, dry place away from direct sunlight." data-id="Simpan tertutup di tempat sejuk dan kering, jauh dari sinar matahari langsung.">Keep sealed in a cool, dry place away from direct sunlight.</dd></div>
-            <div><dt data-en="Certification" data-id="Sertifikasi">Certification</dt><dd data-en="Halal certified" data-id="Bersertifikat halal">Halal certified</dd></div>
+            {product.allergens && <div><dt data-en="Allergens" data-id="Alergen">Allergens</dt><dd data-en={product.allergens.en} data-id={product.allergens.id}>{product.allergens.en}</dd></div>}
+            {product.storage && <div><dt data-en="Storage" data-id="Penyimpanan">Storage</dt><dd data-en={product.storage.en} data-id={product.storage.id}>{product.storage.en}</dd></div>}
+            {product.certification && <div><dt data-en="Certification" data-id="Sertifikasi">Certification</dt><dd data-en={product.certification.en} data-id={product.certification.id}>{product.certification.en}</dd></div>}
           </dl>
 
           <div class="detail-actions">
