@@ -272,8 +272,8 @@ p { margin-bottom: var(--space-4); }
 }
 .lang-switch button[aria-pressed='true'] {
   color: #ffffff;
-  background: var(--color-text);
-  box-shadow: 0 2px 8px rgba(61, 42, 34, 0.25);
+  background: var(--color-berry);
+  box-shadow: 0 2px 8px rgb(142 64 87 / 25%);
 }
 .cta-icon {
   width: 1.05rem;
