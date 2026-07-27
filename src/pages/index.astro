@@ -8,7 +8,7 @@ import { categories, featured } from '../data/products';
 const featuredTones = [categories[0].color, categories[2].color, categories[3].color];
 const featuredClaims = [categories[0].claims, categories[2].claims, categories[3].claims];
 ---
-<BaseLayout title="Crafted for Little Tummies. Loved by every age." description="The Munching Queen creates thoughtfully made Indonesian snacks for families, using real ingredients and joyful flavours.">
+<BaseLayout title="Healthy snacks, happy little munchers" description="The Munching Queen creates thoughtfully made Indonesian snacks for families, using real ingredients and joyful flavours.">
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
@@ -42,9 +42,7 @@ const featuredClaims = [categories[0].claims, categories[2].claims, categories[3
 
   <section class="section">
     <div class="container">
-      <span class="eyebrow" data-en="A peek inside the pantry" data-id="Mengintip isi lemari camilan">A peek inside the pantry</span>
-      <h2 data-en="Something for every kind of munch." data-id="Ada camilan untuk setiap selera.">Something for every kind of munch.</h2>
-      <p class="lede muted" data-en="Savoury, sweet, familiar or adventurous—start with three family favourites." data-id="Gurih, manis, familiar, atau berani—mulai dari tiga favorit keluarga.">Savoury, sweet, familiar or adventurous—start with three family favourites.</p>
+      <h2 class="products-preview-title" data-en="PRODUCTS" data-id="PRODUK">PRODUCTS</h2>
       <div class="card-grid">
         {featured.map((product, index) => <ProductCard product={product} tone={featuredTones[index]} claims={featuredClaims[index]} />)}
       </div>
