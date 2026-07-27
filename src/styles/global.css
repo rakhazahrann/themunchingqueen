@@ -505,7 +505,7 @@ body.nav-open { overflow: hidden; }
   color: var(--color-text);
   border: 0;
   border-radius: 0;
-  background: #f8c8dc;
+  background: color-mix(in srgb, var(--color-blush) 38%, white);
   isolation: isolate;
 }
 
