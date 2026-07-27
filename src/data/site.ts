@@ -8,7 +8,6 @@ export const site = {
   phoneHref: '+6283898033439',
   instagram: '@themunchingqueen',
   instagramUrl: 'https://instagram.com/themunchingqueen',
-  address: 'Simpang Darmo Permai Utara, Sambikerep, Surabaya',
 };
 
 export const nav = [

@@ -1,93 +1,164 @@
 # The Munching Queen Design System
 
-## Brand direction
-**Pastel pantry:** playful seperti meja snack anak, rapi seperti rak produk premium. Bentuk kemasan dan remah menjadi bahasa visual; foto produk tetap pusat perhatian.
+## Brand Direction
 
-Signature: **Queen's Picnic Board** — hero seperti alas piknik pastel miring, dengan tiga kemasan mengambang dan label berbentuk stiker. Risiko visual ini spesifik pada dunia snack, tetapi area teks tetap tenang.
+**Bright playful-premium pantry:** family snack brand with clean cream surfaces, confident berry typography, fresh pastel product stages, and real product photography as primary visual.
 
-## Color tokens
-| Token | Hex | Peran |
+Visual priority:
+1. Product packaging and lifestyle photography.
+2. Clear product family names and exact client copy.
+3. Compact filters and claims that help visitors browse.
+4. Decorative styling only when it supports hierarchy.
+
+No mascot clusters, floating packaging, stickers, crumbs, tilted strips, or brown-dominant panels. Layout stays plain, modern, bright, and easy to scan.
+
+## Color Tokens
+
+| Token | Hex | Role |
 |---|---|---|
-| Cream | `#FFFAFB` | Canvas utama, putih dengan undertone pink tipis |
-| Paper | `#FFFEFB` | Permukaan card |
-| Butter | `#EFC99D` | Highlight dan chips |
-| Blush | `#F3BFD6` | Panel hangat dan aksen pink |
-| Mint | `#DBE8B9` | Panel sehat/sertifikasi |
-| Powder | `#DCEBF1` | Panel informasi |
-| Cocoa | `#744B37` | Teks utama |
-| Berry | `#8E4057` | CTA, link, focus |
-| Heading / Pink Baby | `#F488A9` | Heading global |
-| Leaf | `#526918` | Badge dan teks positif |
+| Background Pink | `#FFF3F6` | Main page canvas |
+| Background Cream | `#FFF8F3` | Header, cards, forms, and quiet surfaces |
+| Heading / Active | `#8B3E5F` | Navigation, filters, active controls, links |
+| Heading Pink | `#EF668E` | Main headings and prominent product-family titles |
+| Body Text | `#6A4B3C` | Long-form body copy only |
+| Accent Orange | `#F2B36B` | Warm highlights and selected image stages |
+| Ingredients Green | `#4F7258` | Positive claims and ingredient-led accents |
+| Blush | `#FFD4DF` | Soft hover and secondary backgrounds |
+| Mint | `#DBE8B9` | Claim badges and certification accents |
+| Powder | `#DCEBF1` | Cool product stages |
 
-Canvas harus tetap dominan putih; undertone pink hanya memberi kehangatan dan tidak boleh terlihat seperti panel berwarna. Panel pantry memakai campuran 38% Blush dan 62% putih. Pastel tidak dipakai sebagai teks. Heading memakai Heading Green; body memakai Cocoa; CTA dan aksen memakai Berry/Leaf.
+Rules:
+- Brown is limited to readable body copy. Never use brown for navigation, filters, active states, or large backgrounds.
+- Header and controls use Berry, Heading Pink, Blush, and Cream.
+- Active controls use Berry background with white text.
+- Claim badges use Mint background with Ingredients Green text.
+- Canvas remains bright. Pastels support product photography, not compete with it.
+- `src/styles/global.css` is source of truth for technical token values.
 
 ## Typography
-- Display: **Poppins**, 600–900. Dipakai pada hero dan heading.
-- Body: **Poppins**, 400–800. Bulat, ramah, tetap mudah dibaca.
-- Utility: body uppercase, 800, tracking `0.1em`; tidak perlu font ketiga.
-- Scale: `clamp()` dari 0.78rem sampai 5.4rem. Body ideal 1rem–1.125rem, line-height 1.65.
+
+- Display and body: **Poppins**.
+- Headings: 700–900, tight tracking, pink or berry.
+- Body: 400–600, Body Text, line-height 1.5–1.65.
+- Utility labels: uppercase, 800, tracking `0.08em–0.11em`, Berry.
+- Product Profile text must match client PDF. Do not rewrite or shorten English copy.
+- Bilingual text remains available through `data-en` and `data-id`.
 
 ## Layout
-- Mobile-first, container maksimum 1180px.
-- Grid produk: 1 kolom; 2 mulai 680px; 3 mulai 1024px.
-- Section spacing: 4rem mobile, 7rem desktop.
-- Hero: copy kiri dan picnic board kanan; menumpuk pada mobile.
 
-## Shape and depth
-- Radius card 24–32px; pill 999px.
-- Border cocoa transparan, bukan hairline abu generik.
-- Shadow lembut berwarna cocoa; tidak memakai glassmorphism.
-- Decorative crumbs memakai pseudo-elements/CSS, maksimal satu cluster per section.
+- Mobile-first, maximum container width 1180px.
+- Product grid: one column; two from 680px; three from 1024px.
+- Section spacing: approximately 4rem mobile and up to 7rem desktop.
+- Home hero: copy left, one lifestyle photo right; stacked on mobile.
+- Products hero: `Our Products`, filters directly below, one lifestyle photo alongside.
+- Category headings align both columns from the top.
+- Categories may use brief-specific headings, captions, and claim visibility.
+
+## Shape And Depth
+
+- Product cards: 24–32px radius.
+- Controls and compact labels: pill radius unless brief shows a softer rectangular chip.
+- Borders use translucent Berry, not brown.
+- Shadows use low-opacity Berry or neutral text color.
+- Certification marks use clean cream cards with a thin Berry border and soft shadow; show logo and certification name only, without captions.
+- Avoid glass effects except subtle header blur for sticky-header readability.
 
 ## Components
-### Button
-- Primary: Berry, putih, radius pill.
-- Secondary: transparan, border Cocoa.
-- Hover memakai translateY CSS 2px; focus ring Butter + Berry.
 
-### Product card
-- Image stage memakai pastel kategori.
-- Nama, ukuran, maksimal dua badge agar tidak padat.
-- Seluruh isi tidak clickable; CTA link eksplisit.
+### Header
 
-### Language switcher
-- Segmented `EN / ID`. Active state ditentukan `aria-pressed` dan background Cocoa.
+- Background Cream with subtle translucency.
+- Brand title, nav labels, menu icon, and active language use Berry.
+- Brand tagline uses Heading Pink.
+- Navigation track uses pale Blush; active indicator uses Heading Pink mixed with Cream.
+- Top accent transitions Berry to Heading Pink to Accent Orange.
+- Sticky state may add subtle Berry shadow, never brown.
 
-### Product filter
-- Button pills dengan `aria-pressed`. Kategori tersembunyi hanya setelah JS siap; tanpa JS semua terlihat.
+### Buttons
 
-### Form
-- Label selalu terlihat. Native required/email validation. Honeypot tersembunyi dari tab order.
-- Submit membuka aplikasi email; fallback email link selalu tersedia.
+- Primary: Berry background, white text.
+- Secondary: transparent with Berry border and text.
+- Hover uses at most 2px vertical movement.
+- Focus ring always visible in Berry.
+
+### Product Cards
+
+- Image stage uses product-specific pastel.
+- Card body shows sizes, product name, applicable claims, and explicit `View details` action.
+- Do not show short descriptive caption in cards.
+- Claims can differ by product. Never apply ingredient-specific claims to unrelated variants.
+- Product Profile appears in modal and follows PDF wording.
+
+### Product Filters
+
+- Text and border use Berry; never brown.
+- Hover uses pale Blush.
+- Active state uses Berry background and white text.
+- `aria-pressed` communicates state.
+- Filtering remains progressive enhancement; all products show without JavaScript.
+
+### Claims
+
+- Mint background with Ingredients Green text.
+- Display all claims required by brief.
+- Do not create bubbles where brief says none.
+- `Kids Friendly Series`, `Spicy Series`, and `Cappuccino Series` are category labels, not claim bubbles.
+
+### Product Categories
+
+- Standard label: `Kids Friendly Series`.
+- Spicy label: `Spicy Series`; heading: `Mala Xiang Guo & Suteed Balinese Spices`; no intro or bubbles.
+- Cappuccino label: `Cappuccino Series`; heading: `Cappuccino Chips`; brief caption shown; no bubbles.
+- Crispy Brownies has no category intro caption.
+
+### Language Switcher
+
+- Segmented `EN / ID` control.
+- Active state uses Berry background and white text.
+- State uses `aria-pressed` and persists after reload.
+
+### Forms
+
+- Labels remain visible.
+- Native required and email validation stay enabled.
+- Honeypot remains outside tab order.
+- Contact form stays mailto until backend exists.
 
 ## Motion
-- Hero entrance: 0.75s, `power3.out`, stagger 0.08s.
-- Product float: 3.8–4.8s, yoyo, transform only.
-- Reveal: IntersectionObserver + GSAP, 0.65s.
-- Hover/focus: CSS native.
-- `prefers-reduced-motion: reduce`: duration 0, tanpa floating, smooth scroll mati.
 
-## Responsive breakpoints
-- 680px: dua kolom, nav desktop mulai layak.
-- 860px: hero dua kolom dan menu desktop.
-- 1024px: grid produk tiga kolom.
+- Motion only supports hierarchy: short hero entrance and reveal transitions.
+- Animate transform and opacity only.
+- No continuous package floating or decorative movement.
+- `prefers-reduced-motion: reduce` disables nonessential motion and smooth scrolling.
+
+## Responsive Breakpoints
+
+- 680px: two-column product grid where space allows.
+- 860px: desktop navigation and two-column major layouts.
+- 1024px: three-column product grid.
+- Mobile filters scroll horizontally without hiding controls.
 
 ## Accessibility
-- Minimum target 44px.
-- Visible skip link dan focus ring.
-- Heading hierarchy satu `h1` per halaman.
-- Alt text menjelaskan produk/kemasan, tidak mengulang kata “image”.
-- Jangan mengandalkan warna saja; active states memakai teks/ARIA.
-- Kontras diperiksa pada setiap pasangan token.
+
+- Minimum control target: 44px.
+- Visible skip link and focus ring.
+- One `h1` per page with valid heading hierarchy.
+- Images include useful alt text and dimensions.
+- Active state never relies on color alone; use text and ARIA state.
+- Preserve readable contrast for all token pairs.
 
 ## Usage
+
 ```css
-.promo {
-  color: var(--color-cocoa);
-  background: var(--color-butter);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
+.filter-button {
+  color: var(--color-berry);
+  border-color: color-mix(in srgb, var(--color-berry) 42%, transparent);
+  background: var(--color-paper);
+}
+
+.filter-button[aria-pressed='true'] {
+  color: white;
+  border-color: var(--color-berry);
+  background: var(--color-berry);
 }
 ```
-
-`src/styles/global.css` tetap source of truth nilai teknis. Dokumen ini menjelaskan alasan dan aturan pemakaian.

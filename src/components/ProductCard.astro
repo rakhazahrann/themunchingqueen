@@ -1,9 +1,10 @@
 ---
 import type { Product, Category } from '../data/products';
 const { product, tone = 'butter', claims = [] } = Astro.props as { product: Product; tone?: Category['color']; claims?: Category['claims'] };
+const productClaims = product.claims ?? claims;
 const gallery = product.gallery ?? [product.image];
 const flavor = product.flavor ?? product.description;
-const productId = product.name.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const productId = product.image.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const productTone = product.tone ?? tone;
 const stageStyle = product.bgColor ? `background-color: ${product.bgColor};` : '';
 const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
@@ -15,8 +16,7 @@ const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
   <div class="product-body">
     <div class="sizes">{product.sizes.map((size) => <span class="size">{size}</span>)}</div>
     <h3 style={titleStyle} data-en={product.name.en} data-id={product.name.id}>{product.name.en}</h3>
-    <p data-en={product.description.en} data-id={product.description.id}>{product.description.en}</p>
-    {claims.length > 0 && <div class="badges">{claims.slice(0, 2).map((claim) => <span class="badge" data-en={claim.en} data-id={claim.id}>{claim.en}</span>)}</div>}
+    {productClaims.length > 0 && <div class="badges">{productClaims.map((claim) => <span class="badge" data-en={claim.en} data-id={claim.id}>{claim.en}</span>)}</div>}
     
     <div class="product-card-footer">
       <button class="modal-trigger-btn" type="button" data-open-modal={productId} data-en="View details" data-id="Lihat detail">
@@ -41,7 +41,6 @@ const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
           </div>
           {gallery.length > 1 && (
             <div class="modal-thumbs-wrapper">
-              <span class="modal-thumbs-label" data-en="Select package size:" data-id="Pilih ukuran kemasan:">Select package size:</span>
               <div class="modal-thumbs">
                 {gallery.map((img, idx) => (
                   <button type="button" class={`modal-thumb-btn ${idx === 0 ? 'is-active' : ''}`} data-src={img} aria-label={`View size ${product.sizes[idx] ?? idx + 1}`}>
@@ -60,9 +59,9 @@ const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
           <h2 class="modal-title" data-en={product.name.en} data-id={product.name.id}>{product.name.en}</h2>
           <p class="modal-desc" data-en={product.description.en} data-id={product.description.id}>{product.description.en}</p>
           
-          {claims.length > 0 && (
+          {productClaims.length > 0 && (
             <div class="benefit-list">
-              {claims.map((claim) => (
+              {productClaims.map((claim) => (
                 <span data-en={`✓ ${claim.en}`} data-id={`✓ ${claim.id}`}>✓ {claim.en}</span>
               ))}
             </div>
@@ -70,7 +69,7 @@ const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
 
           <dl class="detail-specs">
             <div><dt data-en="Available sizes" data-id="Ukuran tersedia">Available sizes</dt><dd>{product.sizes.join(' · ')}</dd></div>
-            <div><dt data-en="Flavor profile" data-id="Profil rasa">Flavor profile</dt><dd data-en={flavor.en} data-id={flavor.id}>{flavor.en}</dd></div>
+            <div><dt data-en="Product profile" data-id="Profil produk">Product profile</dt><dd data-en={flavor.en} data-id={flavor.id}>{flavor.en}</dd></div>
             <div>
               <dt data-en="Ingredients" data-id="Bahan">Ingredients</dt>
               {product.ingredients ? (
@@ -79,7 +78,7 @@ const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
                 <dd data-en="See the selected pack for its complete, size-specific label." data-id="Lihat kemasan pilihan untuk label lengkap sesuai ukurannya.">See the selected pack for its complete, size-specific label.</dd>
               )}
             </div>
-            {product.allergens && <div><dt data-en="Allergens" data-id="Alergen">Allergens</dt><dd data-en={product.allergens.en} data-id={product.allergens.id}>{product.allergens.en}</dd></div>}
+            {product.allergens && <div><dt data-en="Allergen" data-id="Alergen">Allergen</dt><dd data-en={product.allergens.en} data-id={product.allergens.id}>{product.allergens.en}</dd></div>}
             {product.storage && <div><dt data-en="Storage" data-id="Penyimpanan">Storage</dt><dd data-en={product.storage.en} data-id={product.storage.id}>{product.storage.en}</dd></div>}
             {product.certification && <div><dt data-en="Certification" data-id="Sertifikasi">Certification</dt><dd data-en={product.certification.en} data-id={product.certification.id}>{product.certification.en}</dd></div>}
           </dl>

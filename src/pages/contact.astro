@@ -5,46 +5,14 @@ import { site } from '../data/site';
 ---
 <BaseLayout title="Contact us" description="Contact The Munching Queen for collaborations, feedback, product questions and online store information.">
   <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow" data-en="Contact us" data-id="Hubungi kami">Contact us</span>
-      <h1 data-en="Let’s talk over a good munch." data-id="Mari berbincang sambil ngemil.">Let’s talk over a good munch.</h1>
-      <p class="lede" data-en="Collaboration idea, thoughtful feedback or a question about our snacks? Send us a note. We aim to reply within one business day." data-id="Punya ide kolaborasi, masukan, atau pertanyaan tentang camilan kami? Kirim pesan. Kami berusaha membalas dalam satu hari kerja.">Collaboration idea, thoughtful feedback or a question about our snacks? Send us a note. We aim to reply within one business day.</p>
+    <div class="container contact-intro">
+      <h1 data-en="CONTACT US" data-id="HUBUNGI KAMI">CONTACT US</h1>
+      <p class="lede" data-en="We'd love to hear from you and your feedback is important to us. Please do not hesitate to contact us regarding any collaboration, feedback, and any inquiries! Drop us a line below and we'll do our best to get back to you within one business day." data-id="Kami ingin mendengar dari Anda dan masukan Anda sangat berarti bagi kami. Jangan ragu untuk menghubungi kami untuk kolaborasi, feedback, atau pertanyaan apa pun! Kirim pesan di bawah dan kami akan berusaha membalas dalam satu hari kerja.">We'd love to hear from you and your feedback is important to us. Please do not hesitate to contact us regarding any collaboration, feedback, and any inquiries! Drop us a line below and we'll do our best to get back to you within one business day.</p>
     </div>
   </section>
 
   <section class="section section--tight">
     <div class="container contact-grid">
-      <div class="reveal">
-        <span class="eyebrow" data-en="Say hello" data-id="Sapa kami">Say hello</span>
-        <h2 data-en="A real person will read your message." data-id="Pesan Anda akan dibaca oleh tim kami.">A real person will read your message.</h2>
-        <ul class="contact-list">
-          <li>
-            <a href={`mailto:${site.email}`}>
-              <b aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              </b>
-              <span>{site.email}</span>
-            </a>
-          </li>
-          <li>
-            <a href={`https://wa.me/${site.phoneHref.slice(1)}`} target="_blank" rel="noreferrer">
-              <b aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.76.459 3.475 1.33 4.985l-1.413 5.163 5.283-1.385c1.455.793 3.095 1.211 4.787 1.212h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.668-1.038-5.176-2.924-7.062a9.923 9.923 0 0 0-7.066-2.913zm5.782 14.402c-.244.688-1.42 1.312-1.96 1.393-.497.075-1.137.108-1.832-.115-1.18-.378-2.673-1.077-4.103-2.355-1.748-1.562-2.92-3.487-3.23-4.017-.309-.53-.033-.816.213-1.062.221-.22.493-.574.739-.861.246-.288.328-.492.493-.82.164-.329.082-.616-.041-.862-.123-.246-1.067-2.571-1.463-3.518-.386-.923-.778-.797-1.067-.812-.274-.015-.59-.015-.905-.015s-.824.118-1.258.59c-.434.473-1.658 1.621-1.658 3.951 0 2.33 1.699 4.58 1.932 4.894.233.314 3.344 5.106 8.1 7.16 1.131.489 2.014.781 2.702 1.001 1.135.361 2.169.31 2.986.188.911-.136 2.8-1.144 3.197-2.25.397-1.106.397-2.053.279-2.251-.118-.198-.434-.316-.906-.552z"/></svg>
-              </b>
-              <span>{site.phone}</span>
-            </a>
-          </li>
-          <li>
-            <a href={site.instagramUrl} target="_blank" rel="noreferrer">
-              <b aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              </b>
-              <span>{site.instagram}</span>
-            </a>
-          </li>
-        </ul>
-        <p class="muted" data-en="CV. Trinusa Jaya Abadi · Surabaya, Indonesia" data-id="CV. Trinusa Jaya Abadi · Surabaya, Indonesia">CV. Trinusa Jaya Abadi · Surabaya, Indonesia</p>
-      </div>
       <form class="contact-form reveal" id="contact-form" data-recipient={site.email}>
         <h2 data-en="Drop us a line" data-id="Kirim pesan">Drop us a line</h2>
         <div class="field"><label for="name" data-en="Name" data-id="Nama">Name</label><input id="name" name="name" autocomplete="name" required /></div>
@@ -58,16 +26,12 @@ import { site } from '../data/site';
     </div>
   </section>
 
-  <section class="section tone-mint" id="shop-online">
+  <section class="section market-section" id="shop-online">
     <div class="container">
-      <span class="eyebrow" data-en="Shop online" data-id="Belanja online">Shop online</span>
-      <h2 data-en="Pick the store closest to your pantry." data-id="Pilih toko yang paling dekat.">Pick the store closest to your pantry.</h2>
-      <p class="lede muted" data-en="Our Jakarta and Surabaya stores are available on Shopee and Tokopedia." data-id="Toko Jakarta dan Surabaya kami tersedia di Shopee dan Tokopedia.">Our Jakarta and Surabaya stores are available on Shopee and Tokopedia.</p>
+      <span class="eyebrow" data-en="Online Marketplace" data-id="Marketplace Online">Online Marketplace</span>
       <MarketplaceLinks />
     </div>
   </section>
-
-  <section class="section section--tight"><div class="container"><div class="cta-panel reveal"><span class="eyebrow" data-en="Quick question?" data-id="Pertanyaan singkat?">Quick question?</span><h2 data-en="WhatsApp may be the fastest way." data-id="WhatsApp mungkin cara tercepat.">WhatsApp may be the fastest way.</h2><div class="button-row" style="justify-content:center"><a class="button" href={`https://wa.me/${site.phoneHref.slice(1)}`} target="_blank" rel="noreferrer" data-en="Chat on WhatsApp" data-id="Chat di WhatsApp">Chat on WhatsApp</a></div></div></div></section>
 
   <script>
     const form = document.querySelector('#contact-form');

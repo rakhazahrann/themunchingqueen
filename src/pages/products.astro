@@ -4,33 +4,45 @@ import ProductCard from '../components/ProductCard.astro';
 import { categories } from '../data/products';
 ---
 <BaseLayout title="Our products" description="Explore The Munching Queen's Fish & Cheese crackers, pasta chips, crispy brownies, tempeh chips, spicy crackers and cappuccino chips.">
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow" data-en="Our products" data-id="Produk kami">Our products</span>
-      <h1 data-en="Big flavour. Little bags of joy." data-id="Rasa besar. Kemasan kecil penuh bahagia.">Big flavour. Little bags of joy.</h1>
-      <p class="lede" data-en="Meet our whole pantry—from the first Fish & Cheese crunch born in our kitchen to spirited Indonesian tempeh and prawn crackers." data-id="Kenali seluruh koleksi kami—dari kerenyahan Ikan & Keju pertama yang lahir di dapur, hingga keripik tempe dan kerupuk udang bercita rasa Indonesia.">Meet our whole pantry—from the first Fish & Cheese crunch born in our kitchen to spirited Indonesian tempeh and prawn crackers.</p>
-      <div class="category-filter" aria-label="Product category filters">
-        <button class="filter-button" type="button" data-filter="all" aria-pressed="true" data-en="All snacks" data-id="Semua camilan">All snacks</button>
-        {categories.map((category) => <button class="filter-button" type="button" data-filter={category.id} aria-pressed="false" data-en={category.name.en} data-id={category.name.id}>{category.name.en}</button>)}
+  <section class="page-hero products-page-hero">
+    <div class="container products-hero-content">
+      <div class="products-hero-text">
+        <h1 data-en="Our Products" data-id="Produk Kami">Our Products</h1>
+        <div class="category-filter" aria-label="Product category filters">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true" data-en="All snacks" data-id="Semua camilan">All snacks</button>
+          {categories.map((category) => <button class="filter-button" type="button" data-filter={category.id} aria-pressed="false" data-en={category.name.en} data-id={category.name.id}>{category.name.en}</button>)}
+        </div>
       </div>
+      <figure class="products-hero-photo">
+        <img src="/images/lifestyle/pasta-chips.webp" alt="The Munching Queen Oven Baked Pasta Chips" width="1080" height="1350" loading="lazy" />
+        <figcaption data-en="Oven Baked Pasta Chips" data-id="Keripik Pasta Panggang">Oven Baked Pasta Chips</figcaption>
+      </figure>
     </div>
   </section>
 
-  <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>No preservatives</span><span>Real ingredients</span><span>Playful flavours</span><span>Made with care</span><span>No preservatives</span><span>Real ingredients</span><span>Playful flavours</span><span>Made with care</span></div></div>
+  <div class="marquee" aria-hidden="true"><div class="marquee-track"><span data-en="Kids-Friendly Snack" data-id="Camilan Ramah Anak">Kids-Friendly Snack</span><span data-en="Crafted for Little Tummies, Loved by Every Age" data-id="Dibuat untuk Perut Mungil, Disukai Segala Usia">Crafted for Little Tummies, Loved by Every Age</span><span data-en="Healthier Option Better" data-id="Pilihan Lebih Sehat dan Lebih Baik">Healthier Option Better</span><span data-en="Kids-Friendly Snack" data-id="Camilan Ramah Anak">Kids-Friendly Snack</span><span data-en="Crafted for Little Tummies, Loved by Every Age" data-id="Dibuat untuk Perut Mungil, Disukai Segala Usia">Crafted for Little Tummies, Loved by Every Age</span><span data-en="Healthier Option Better" data-id="Pilihan Lebih Sehat dan Lebih Baik">Healthier Option Better</span></div></div>
 
   <div class="container">
     {categories.map((category) => (
       <section class="category-section" data-category={category.id}>
-        <div class="category-heading">
-          <div><span class="eyebrow" data-en="Snack family" data-id="Keluarga camilan">Snack family</span><h2 data-en={category.name.en} data-id={category.name.id}>{category.name.en}</h2></div>
-          <div><p data-en={category.intro.en} data-id={category.intro.id}>{category.intro.en}</p><div class="badges">{category.claims.map((claim) => <span class="badge" data-en={claim.en} data-id={claim.id}>{claim.en}</span>)}</div></div>
+        <div class:list={['category-heading', { 'category-heading--solo': category.id === 'spicy' }]}>
+          <div>
+            <span
+              class="eyebrow"
+              data-en={category.id === 'spicy' ? 'Spicy Series' : category.id === 'cappuccino' ? 'Cappuccino Series' : 'Kids Friendly Series'}
+              data-id={category.id === 'spicy' ? 'Seri Pedas' : category.id === 'cappuccino' ? 'Seri Cappuccino' : 'Seri Ramah Anak'}
+            >{category.id === 'spicy' ? 'Spicy Series' : category.id === 'cappuccino' ? 'Cappuccino Series' : 'Kids Friendly Series'}</span>
+            <h2
+              data-en={category.id === 'spicy' ? 'Mala Xiang Guo & Suteed Balinese Spices' : category.id === 'cappuccino' ? 'Cappuccino Chips' : category.name.en}
+              data-id={category.id === 'spicy' ? 'Mala Xiang Guo & Bumbu Bali Tumis' : category.id === 'cappuccino' ? 'Keripik Cappuccino' : category.name.id}
+            >{category.id === 'spicy' ? 'Mala Xiang Guo & Suteed Balinese Spices' : category.id === 'cappuccino' ? 'Cappuccino Chips' : category.name.en}</h2>
+          </div>
+          {category.id !== 'spicy' && <div>{category.id !== 'brownies' && <p data-en={category.id === 'cappuccino' ? 'Contains 100% real coffee beans & Topped with Caramel Sauce and Biscoff Crumbs' : category.intro.en} data-id={category.id === 'cappuccino' ? 'Mengandung 100% biji kopi asli, dilengkapi saus karamel dan remah Biscoff' : category.intro.id}>{category.id === 'cappuccino' ? 'Contains 100% real coffee beans & Topped with Caramel Sauce and Biscoff Crumbs' : category.intro.en}</p>}<div class="badges">{category.claims.map((claim) => <span class="badge" data-en={claim.en} data-id={claim.id}>{claim.en}</span>)}</div></div>}
         </div>
         <div class="card-grid">{category.products.map((product) => <ProductCard product={product} tone={category.color} claims={category.claims} />)}</div>
       </section>
     ))}
   </div>
-
-  <section class="section section--tight"><div class="container"><div class="cta-panel reveal"><span class="eyebrow" data-en="Found your flavour?" data-id="Sudah menemukan rasanya?">Found your flavour?</span><h2 data-en="We will show you where to get it." data-id="Kami akan menunjukkan tempat membelinya.">We will show you where to get it.</h2><div class="button-row" style="justify-content:center"><a class="button" href="/contact#shop-online" data-en="Where to buy" data-id="Tempat membeli">Where to buy</a></div></div></div></section>
 
   <script>
     document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((button) => {
