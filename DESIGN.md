@@ -8,20 +8,22 @@ Signature: **Queen's Picnic Board** — hero seperti alas piknik pastel miring, 
 ## Color tokens
 | Token | Hex | Peran |
 |---|---|---|
-| Cream | `#FFF8EE` | Canvas utama |
-| Butter | `#F7D983` | Highlight dan chips |
-| Blush | `#F3BFC3` | Panel hangat |
-| Mint | `#BFDCCB` | Panel sehat/sertifikasi |
-| Powder | `#BDD9E7` | Panel informasi |
-| Cocoa | `#493B35` | Teks utama |
+| Cream | `#FFFAFB` | Canvas utama, putih dengan undertone pink tipis |
+| Paper | `#FFFEFB` | Permukaan card |
+| Butter | `#EFC99D` | Highlight dan chips |
+| Blush | `#F3BFD6` | Panel hangat dan aksen pink |
+| Mint | `#DBE8B9` | Panel sehat/sertifikasi |
+| Powder | `#DCEBF1` | Panel informasi |
+| Cocoa | `#744B37` | Teks utama |
 | Berry | `#8E4057` | CTA, link, focus |
-| Leaf | `#315E4A` | Badge dan teks positif |
+| Heading / Pink Baby | `#F488A9` | Heading global |
+| Leaf | `#526918` | Badge dan teks positif |
 
-Pastel tidak dipakai sebagai teks di atas cream. Teks dan CTA memakai Cocoa/Berry/Leaf agar kontras jelas.
+Canvas harus tetap dominan putih; undertone pink hanya memberi kehangatan dan tidak boleh terlihat seperti panel berwarna. Panel pantry memakai campuran 38% Blush dan 62% putih. Pastel tidak dipakai sebagai teks. Heading memakai Heading Green; body memakai Cocoa; CTA dan aksen memakai Berry/Leaf.
 
 ## Typography
-- Display: **Fraunces**, 600–700. Dipakai pada hero dan heading, bukan body panjang.
-- Body: **Nunito Sans**, 400–800. Bulat, ramah, tetap mudah dibaca.
+- Display: **Poppins**, 600–900. Dipakai pada hero dan heading.
+- Body: **Poppins**, 400–800. Bulat, ramah, tetap mudah dibaca.
 - Utility: body uppercase, 800, tracking `0.1em`; tidak perlu font ketiga.
 - Scale: `clamp()` dari 0.78rem sampai 5.4rem. Body ideal 1rem–1.125rem, line-height 1.65.
 
