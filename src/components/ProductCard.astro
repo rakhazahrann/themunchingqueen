@@ -8,6 +8,7 @@ const productId = product.image.toLowerCase().replace(/[^a-z0-9]+/g, '-').replac
 const productTone = product.tone ?? tone;
 const stageStyle = product.bgColor ? `background-color: ${product.bgColor};` : '';
 const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
+const thumbAccentStyle = product.accentColor ? `--thumb-accent: ${product.accentColor};` : '';
 ---
 <article class="product-card reveal">
   <div class={`product-stage tone-${productTone}`} style={stageStyle}>
@@ -41,7 +42,7 @@ const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
           </div>
           {gallery.length > 1 && (
             <div class="modal-thumbs-wrapper">
-              <div class="modal-thumbs">
+              <div class="modal-thumbs" style={thumbAccentStyle}>
                 {gallery.map((img, idx) => (
                   <button type="button" class={`modal-thumb-btn ${idx === 0 ? 'is-active' : ''}`} data-src={img} aria-label={`View size ${product.sizes[idx] ?? idx + 1}`}>
                     <img src={img} alt="" width="150" height="150" loading="lazy" />
@@ -55,9 +56,7 @@ const titleStyle = product.accentColor ? `color: ${product.accentColor};` : '';
 
         <!-- Product Info Column -->
         <div class="modal-info">
-          <span class="eyebrow" data-en="Inside the bag" data-id="Isi kemasan">Inside the bag</span>
-          <h2 class="modal-title" data-en={product.name.en} data-id={product.name.id}>{product.name.en}</h2>
-          <p class="modal-desc" data-en={product.description.en} data-id={product.description.id}>{product.description.en}</p>
+          <h2 class="modal-title" style={titleStyle} data-en={product.name.en} data-id={product.name.id}>{product.name.en}</h2>
           
           {productClaims.length > 0 && (
             <div class="benefit-list">
