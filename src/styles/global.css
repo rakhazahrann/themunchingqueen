@@ -499,7 +499,7 @@ body.nav-open { overflow: hidden; }
 .certification-layout { display: grid; gap: 2rem; }
 .certification-heading { text-align: center; }
 .certification-title { margin: 0; font-size: clamp(3rem, 6vw, 5.75rem); line-height: .95; letter-spacing: -.055em; text-align: center; }
-.cert-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.75rem, 2vw, 1.25rem); }
+.cert-grid { width: 100%; max-width: 45rem; margin-inline: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.75rem, 2vw, 1.25rem); }
 .cert-card { min-width: 0; min-height: 13rem; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(1.25rem, 2vw, 1.75rem); border: 1px solid color-mix(in srgb, var(--color-berry) 16%, transparent); border-radius: var(--radius-md); background: var(--color-paper); box-shadow: 0 10px 28px rgb(201 70 116 / 8%); text-align: center; }
 .cert-card p { display: none; }
 .cert-mark { width: clamp(6.5rem, 9vw, 8rem); height: clamp(7rem, 10vw, 9rem); display: grid; place-items: center; flex-shrink: 0; }
@@ -773,7 +773,7 @@ body.nav-open { overflow: hidden; }
 
 @media (min-width: 1024px) {
   .card-grid { grid-template-columns: repeat(3, 1fr); }
-  .cert-grid { grid-template-columns: repeat(4, 1fr); }
+  .cert-grid { grid-template-columns: repeat(2, 1fr); }
   .market-grid { grid-template-columns: repeat(4, 1fr); }
 }
 

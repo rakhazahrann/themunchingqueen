@@ -6,14 +6,6 @@ interface Props {
 const { type } = Astro.props;
 ---
 
-{type === 'iso' && (
-  <img src="/images/logo/iso.png" alt="ISO 22000 Certification Logo" width="200" height="200" loading="lazy" />
-)}
-
-{type === 'haccp' && (
-  <img src="/images/logo/haccp.png" alt="HACCP Certification Logo" width="200" height="200" loading="lazy" />
-)}
-
 {type === 'bpom' && (
   <img src="/images/logo/bpom.png" alt="BPOM Logo" width="200" height="200" loading="lazy" />
 )}

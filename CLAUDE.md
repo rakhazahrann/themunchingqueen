@@ -20,7 +20,7 @@ Situs statis bilingual untuk brand snack keluarga The Munching Queen. Tiga rute:
 ## Aturan perubahan
 - Bilingual EN/ID wajib. Gunakan `data-en` dan `data-id` untuk teks DOM; default EN. Jangan buat rute bahasa terpisah tanpa permintaan.
 - Alamat perusahaan sengaja belum ditampilkan. Jangan tambahkan alamat atau peta sampai client memberi alamat final.
-- Nomor kontak: `+62 838 9803 3439`; email: `trinusa.food@gmail.com`; Instagram: `@themunchingqueen`.
+- Nomor kontak: `+62 857-1359-0840`; email: `trinusa.food@gmail.com`; Instagram: `@themunchingqueen`.
 - Reuse data dan komponen yang ada. Hindari dependency, wrapper, atau abstraksi baru jika CSS/native Astro cukup.
 - Jaga visual pastel playful-premium sesuai `DESIGN_SYSTEM.md`; semua token baru masuk `global.css`.
 - Aset baru harus URL-safe, punya alt text, width/height, lazy loading kecuali hero, dan ukuran web wajar.
